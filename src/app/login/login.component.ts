@@ -22,19 +22,22 @@ export interface Status {
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
+
 export class LoginComponent {
   response: any;
   message: any;
+Error: any;
   constructor(private ds: DataService, private route: Router) {}
+  
 
   applyForm = new FormGroup({
     email: new FormControl(null, Validators.required),
     password: new FormControl(null, Validators.required),
   });
-
   Login() {
     this.ds.sendRequest('login', this.applyForm.value).subscribe(
       (response: Status) => {
+        this.Error = response.status.message;
         console.log(response.status.message);
         console.log('Application submitted successfully:', response);
         if (response.status.message == 'Login successful.') {

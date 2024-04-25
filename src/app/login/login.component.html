@@ -60,12 +60,18 @@
               required
               style="width: 16rem"
             />
+            @if(Error == "Incorrect email"){
+              <div class="text-danger">Incorrect email</div>
+            }@else{
+              <div class="text-danger"></div>
+              
+            }
 
             <label class="text-bg-black" for="floatingInput"
               >Email address</label
             >
           </div>
-          <h1>...</h1>
+          
           <div class="mb-3 form-floating">
             <input
               formControlName="password"
@@ -76,6 +82,12 @@
               required
               style="width: 16rem"
             />
+            @if(Error == "Incorrect password."){
+              <div class="text-danger">Incorrect password</div>
+            }@else{
+              <div class="text-danger"></div>
+              
+            }
             <label for="exampleInputPassword1" class="form-label"
               >Password</label
             >
