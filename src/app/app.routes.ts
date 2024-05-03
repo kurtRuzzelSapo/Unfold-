@@ -20,4 +20,16 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./signup/signup.component').then((c) => c.SignupComponent),
   },
+  {
+    path: 'about',
+    title: 'about',
+    loadComponent: () =>
+      import('./about/about.component').then((c) => c.AboutComponent),
+  },
+  {
+    path: 'sidenav',
+    title: 'sidenav',
+    loadComponent: () =>
+      import('./sidenav/sidenav.component').then((c) => c.SidenavComponent),
+  },
 ];

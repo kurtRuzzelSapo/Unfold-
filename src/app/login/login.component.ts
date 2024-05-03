@@ -27,6 +27,7 @@ export class LoginComponent {
   response: any;
   message: any;
 Error: any;
+test:any;
   constructor(private ds: DataService, private route: Router) {}
   
 
@@ -34,22 +35,25 @@ Error: any;
     email: new FormControl(null, Validators.required),
     password: new FormControl(null, Validators.required),
   });
-  Login() {
-    this.ds.sendRequest('login', this.applyForm.value).subscribe(
-      (response: Status) => {
-        this.Error = response.status.message;
-        console.log(response.status.message);
-        console.log('Application submitted successfully:', response);
-        if (response.status.message == 'Login successful.') {
-          this.route.navigateByUrl('main');
-          console.log(this.applyForm);
+    Login() {
+      this.ds.sendRequest('login', this.applyForm.value).subscribe(
+        (response: any) => {
+          this.ds.setUserData(response.payload);
+          this.Error = response.status.message;
+          console.log(response.status.message);
+          console.log(response.payload);
+          // console.log(response.payload.address);
+          console.log('Application submitted successfully:', response);
+          if (response.status.message == 'Login successful.') {
+            this.route.navigateByUrl('main');
+            console.log(this.applyForm);
+          }
+        },
+        (error) => {
+          // Handle error response here if needed
+          console.log(this.response.status.message);
+          console.error('Error submitting application:', error);
         }
-      },
-      (error) => {
-        // Handle error response here if needed
-        console.log(this.response.status.message);
-        console.error('Error submitting application:', error);
-      }
-    );
+      );
+    }
   }
-}
